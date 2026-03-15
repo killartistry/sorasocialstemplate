@@ -70,12 +70,14 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     animate();
     var audio = document.createElement('audio');
-    audio.src = 'website song.mp3';
+    audio.src = 'website%20song.mp3';
     audio.loop = true;
     audio.volume = 0.01;
-    audio.autoplay = true;
-    audio.play();
-    console.log('Audio is playing in the background');
+    document.addEventListener('click', function startAudio() {
+        audio.play();
+        document.removeEventListener('click', startAudio);
+        console.log('Audio started after user interaction');
+    });
 
     var card = document.querySelector('.card');
     if (card) {
