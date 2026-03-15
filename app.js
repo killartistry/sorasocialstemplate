@@ -1,6 +1,52 @@
 window.addEventListener('DOMContentLoaded', function() {
+    // Hide everything initially
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease-in';
+
+    // Create enter screen
+    var splash = document.createElement('div');
+    Object.assign(splash.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'black',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: '9999',
+        cursor: 'pointer'
+    });
+    var enterBtn = document.createElement('span');
+    enterBtn.textContent = 'click to enter';
+    Object.assign(enterBtn.style, {
+        color: 'white',
+        fontSize: '18px',
+        fontFamily: 'sans-serif',
+        letterSpacing: '2px',
+        opacity: '0.7',
+        transition: 'opacity 0.3s'
+    });
+    enterBtn.addEventListener('mouseover', function() { enterBtn.style.opacity = '1'; });
+    enterBtn.addEventListener('mouseout', function() { enterBtn.style.opacity = '0.7'; });
+    splash.appendChild(enterBtn);
+    document.body.appendChild(splash);
+    document.body.style.opacity = '1';
+
+    // Prepare audio
+    var audio = document.createElement('audio');
+    audio.src = 'website%20song.mp3';
+    audio.loop = true;
+    audio.volume = 0.01;
+
+    // On click: start music, remove splash, show site
+    splash.addEventListener('click', function() {
+        audio.play();
+        splash.style.transition = 'opacity 0.5s ease';
+        splash.style.opacity = '0';
+        setTimeout(function() { splash.remove(); }, 500);
+    });
 
     var canvas = document.createElement('canvas');
     canvas.id = 'particle-background';
@@ -69,16 +115,6 @@ window.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(animate);
     }
     animate();
-    var audio = document.createElement('audio');
-    audio.src = 'website%20song.mp3';
-    audio.loop = true;
-    audio.volume = 0.01;
-    document.addEventListener('click', function startAudio() {
-        audio.play();
-        document.removeEventListener('click', startAudio);
-        console.log('Audio started after user interaction');
-    });
-
     var card = document.querySelector('.card');
     if (card) {
         box.appendChild(card);
