@@ -1,9 +1,9 @@
 window.addEventListener('DOMContentLoaded', function() {
-    // Hide everything initially
+    // Hide everything early on.
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease-in';
 
-    // Create enter screen
+    // click to enter beginning
     var splash = document.createElement('div');
     Object.assign(splash.style, {
         position: 'fixed',
@@ -34,13 +34,11 @@ window.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(splash);
     document.body.style.opacity = '1';
 
-    // Prepare audio
     var audio = document.createElement('audio');
     audio.src = 'website%20song.mp3';
     audio.loop = true;
     audio.volume = 0.01;
 
-    // On click: start music, remove splash, show site
     splash.addEventListener('click', function() {
         audio.play();
         splash.style.transition = 'opacity 0.5s ease';
