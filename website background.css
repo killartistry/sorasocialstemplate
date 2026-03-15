@@ -1,0 +1,9 @@
+/* general styling for page color gradient background and text */
+body {
+    font-family: 'Arial', sans-serif;
+    color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #000000, #000000);
+    background-size: 400% 400%;
+}
